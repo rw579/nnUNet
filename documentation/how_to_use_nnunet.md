@@ -1,4 +1,10 @@
+## **2024-04-18 UPDATE: New residual encoder UNet presets available!**
+The recommended nnU-Net presets have changed! See [here](resenc_presets.md) how to unlock them!
+
+
 ## How to run nnU-Net on a new dataset
+
+
 Given some dataset, nnU-Net fully automatically configures an entire segmentation pipeline that matches its properties.
 nnU-Net covers the entire pipeline, from preprocessing to model configuration, model training, postprocessing
 all the way to ensembling. After running nnU-Net, the trained model(s) can be applied to the test cases for inference.
@@ -283,6 +289,13 @@ from the respective training). You can pick these files from any of the ensemble
 
 ## How to run inference with pretrained models
 See [here](run_inference_with_pretrained_models.md)
+
+## How to Deploy and Run Inference with YOUR Pretrained Models
+To facilitate the use of pretrained models on a different computer for inference purposes, follow these streamlined steps:
+1. Exporting the Model: Utilize the `nnUNetv2_export_model_to_zip` function to package your trained model into a .zip file. This file will contain all necessary model files.
+2. Transferring the Model: Transfer the .zip file to the target computer where inference will be performed.
+3. Importing the Model: On the new PC, use the `nnUNetv2_install_pretrained_model_from_zip` to load the pretrained model from the .zip file.
+Please note that both computers must have nnU-Net installed along with all its dependencies to ensure compatibility and functionality of the model.
 
 [//]: # (## Examples)
 

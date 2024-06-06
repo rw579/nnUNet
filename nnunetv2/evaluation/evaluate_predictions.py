@@ -92,7 +92,6 @@ def compute_metrics(reference_file: str, prediction_file: str, image_reader_writ
     # load images
     seg_ref, seg_ref_dict = image_reader_writer.read_seg(reference_file)
     seg_pred, seg_pred_dict = image_reader_writer.read_seg(prediction_file)
-    # spacing = seg_ref_dict['spacing']
 
     ignore_mask = seg_ref == ignore_label if ignore_label is not None else None
 
@@ -136,7 +135,7 @@ def compute_metrics_on_folder(folder_ref: str, folder_pred: str, output_file: st
     files_ref = subfiles(folder_ref, suffix=file_ending, join=False)
     if not chill:
         present = [isfile(join(folder_pred, i)) for i in files_ref]
-        assert all(present), "Not all files in folder_pred exist in folder_ref"
+        assert all(present), "Not all files in folder_ref exist in folder_pred"
     files_ref = [join(folder_ref, i) for i in files_pred]
     files_pred = [join(folder_pred, i) for i in files_pred]
     with multiprocessing.get_context("spawn").Pool(num_processes) as pool:
