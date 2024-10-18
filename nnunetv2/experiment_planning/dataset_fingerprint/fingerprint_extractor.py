@@ -126,7 +126,6 @@ class DatasetFingerprintExtractor(object):
             # determine how many foreground voxels we need to sample per training case
             num_foreground_samples_per_case = int(self.num_foreground_voxels_for_intensitystats //
                                                   len(self.dataset))
-
             r = []
             with multiprocessing.get_context("spawn").Pool(self.num_processes) as p:
                 for k in self.dataset.keys():
@@ -153,17 +152,17 @@ class DatasetFingerprintExtractor(object):
                             pbar.update()
                         remaining = [i for i in remaining if i not in done]
                         sleep(0.1)
-
+            
             # results = ptqdm(DatasetFingerprintExtractor.analyze_case,
             #                 (training_images_per_case, training_labels_per_case),
             #                 processes=self.num_processes, zipped=True, reader_writer_class=reader_writer_class,
             #                 num_samples=num_foreground_samples_per_case, disable=self.verbose)
             results = [i.get()[0] for i in r]
-
             shapes_after_crop = [r[0] for r in results]
             spacings = [r[1] for r in results]
             foreground_intensities_per_channel = [np.concatenate([r[2][i] for r in results]) for i in
                                                   range(len(results[0][2]))]
+            
             foreground_intensities_per_channel = np.array(foreground_intensities_per_channel)
             # we drop this so that the json file is somewhat human readable
             # foreground_intensity_stats_by_case_and_modality = [r[3] for r in results]
